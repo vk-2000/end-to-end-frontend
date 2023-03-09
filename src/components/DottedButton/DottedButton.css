@@ -1,0 +1,11 @@
+.dotted-button {
+    width: 100%;
+    background-color: #e9eaf2;
+    border: 2px dotted #5e40d7;
+    border-radius: 10px;
+    height: 50px;
+    color: #5e40d7;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}

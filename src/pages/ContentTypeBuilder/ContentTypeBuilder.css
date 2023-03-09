@@ -1,0 +1,29 @@
+.content-builder-body {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+}
+.content-container {
+    flex-basis: 75%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    background-color: #ebeefe;
+}
+.content-container .content-header {
+    height: 50px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: white;
+    padding: 0 20px;
+    color: #4f4f4f;
+    font-size: 1rem;
+    font-weight: 600;
+}
+.content-container .content-body {
+    flex: 1;
+    display: flex;
+    width: 100%;
+}

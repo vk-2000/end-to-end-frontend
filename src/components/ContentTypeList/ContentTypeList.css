@@ -1,0 +1,22 @@
+.content-type-list-body {
+    flex-basis: 40%;
+    background-color: #d4d6e5;
+    padding: 20px;
+}
+.content-type-list-item {
+    background-color: white;
+    border-radius: 10px;
+    height: 50px;
+    width: 100%;
+    border: none;
+    margin: 5px 0;
+    color: rgba(134,134,134,255);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    align-items: center;
+}
+.content-type-list-item:focus {
+    background-color: #5905ce;
+    color: white;
+}

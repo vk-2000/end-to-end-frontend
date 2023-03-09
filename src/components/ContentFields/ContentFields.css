@@ -1,0 +1,16 @@
+.content-fields-body {
+    flex-basis: 60%;
+    background-color: #ebeefe;
+    padding: 20px;
+}
+.content-fields-body-item {
+    width: 100%;
+    height: 50px;
+    background-color: white;
+    border-radius: 10px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
