@@ -5,9 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import loginImage from '../../assets/images/login-page-3.png';
 import { LOGIN } from '../../constants/apiEndPoints';
 import makeRequest from '../../utils/makeRequest';
-import './Login.css';
+import '../Login/Login.css';
 
-const Login = () => {
+const Register = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
@@ -15,10 +15,10 @@ const Login = () => {
     makeRequest(LOGIN, { data }).then((res) => {
       localStorage.setItem('token', res.token);
       navigate('/dashboard');
-    }).catch((err) => {
-      console.log(err);
-      setErrorMessage(err.response?.data?.message);
-    });
+    }, navigate)
+      .catch((err) => {
+        setErrorMessage(err.message);
+      });
   };
   const loginOptions = {
     email: { required: 'Email is required' },
@@ -46,7 +46,7 @@ const Login = () => {
       </div>
       <div className="form-container">
         <div className="form-header">
-          <h2>Login to you CMS+ account</h2>
+          <h2>Register your CMS+ account</h2>
         </div>
         <form className="form-body" onSubmit={handleSubmit(handleLogin)}>
           <label htmlFor="email">
@@ -59,12 +59,12 @@ const Login = () => {
             <input id="password" type="password" name="password" {...register('password', loginOptions.password)} />
           </label>
           {errors?.password && errors.password.message}
-          <button type="submit">Login</button>
-          <a className="forget-password" href="https://google">forgot password?</a>
+          <button type="submit">Register</button>
+          <btn onClick={() => navigate('/login')} className="forget-password">Already an user?</btn>
         </form>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Register;

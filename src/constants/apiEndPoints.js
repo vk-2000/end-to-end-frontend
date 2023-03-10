@@ -5,6 +5,10 @@ export const LOGIN = {
   url: `${AUTH_URL}/auth/login`,
   method: 'POST',
 };
+export const VERIFY_TOKEN = {
+  url: `${AUTH_URL}/auth/token/verify`,
+  method: 'POST',
+};
 export const GET_ALL_CONTENT_TYPES = {
   url: `${BACKEND_URL}/contents`,
   method: 'GET',
@@ -39,5 +43,9 @@ export const DELETE_COLLECTION_BY_ID = (contentId, collectionId) => ({
 });
 export const UPDATE_COLLECTION_BY_ID = (contentId, collectionId) => ({
   url: `${BACKEND_URL}/contents/${contentId}/collections/${collectionId}`,
+  method: 'PATCH',
+});
+export const UPDATE_CONTENT_NAME_BY_ID = (contentId) => ({
+  url: `${BACKEND_URL}/contents/${contentId}`,
   method: 'PATCH',
 });

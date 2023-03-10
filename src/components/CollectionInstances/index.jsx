@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import './CollectionInstances.css';
 import CollectionModal from '../CollectionModal';
 
+const editIcon = require('../../assets/icons/user-edit-large.png');
+const deleteIcon = require('../../assets/icons/delete-icon.png');
+
 const CollectionInstances = ({
   collections,
   contentType,
@@ -18,8 +21,14 @@ const CollectionInstances = ({
     handleAddCollection(data);
   };
   const submitEditHandler = (data) => {
+    const newData = {};
+    Object.keys(data).forEach((key) => {
+      if (key !== 'id') {
+        newData[key] = data[key];
+      }
+    });
     setShowEditModal(false);
-    handleEditCollection(editCollectionId, data);
+    handleEditCollection(editCollectionId, newData);
   };
   const onCancelHandler = () => {
     setShowAddModal(false);
@@ -32,11 +41,11 @@ const CollectionInstances = ({
   }, [editCollectionId]);
   return (
     <div className="collection-instance-body">
-      {showAddModal && <CollectionModal title={contentType.name} label="hiii" fields={contentType.fields} submitHandler={submitAddHandler} cancelHandler={onCancelHandler} />}
+      {showAddModal && <CollectionModal showDefault={false} title={`New ${contentType.name}`} fields={contentType.fields} submitHandler={submitAddHandler} cancelHandler={onCancelHandler} />}
       {showEditModal && (
       <CollectionModal
-        title={contentType.name}
-        label="hiii"
+        showDefault
+        title={`Modify ${contentType.name}`}
         fields={
             collections.find((collection) => collection.id === editCollectionId).values
         }
@@ -83,10 +92,12 @@ const CollectionInstances = ({
                   }}
                   type="button"
                 >
-                  E
+                  <img src={editIcon} alt="edit" />
 
                 </button>
-                <button onClick={() => handleDeleteCollection(collection.id)} type="button">D</button>
+                <button onClick={() => handleDeleteCollection(collection.id)} type="button">
+                  <img src={deleteIcon} alt="delete" />
+                </button>
               </div>
             </div>
 

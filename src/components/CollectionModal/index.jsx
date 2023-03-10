@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 
 const CollectionModal = ({
-  title, fields, submitHandler, cancelHandler,
+  title, fields, submitHandler, cancelHandler, showDefault,
 }) => {
   const { register, handleSubmit } = useForm();
   return (
@@ -22,7 +22,7 @@ const CollectionModal = ({
               <div>
                 {field}
               </div>
-              <input defaultValue={fields[field]} type="string" name={field} id={field} {...register(field)} />
+              <input defaultValue={showDefault ? fields[field] : ''} type="string" name={field} id={field} {...register(field)} />
             </label>
           ))}
           <div className="collection-modal-btn-container">
@@ -46,4 +46,5 @@ CollectionModal.propTypes = {
   })).isRequired,
   submitHandler: PropTypes.func.isRequired,
   cancelHandler: PropTypes.func.isRequired,
+  showDefault: PropTypes.bool.isRequired,
 };

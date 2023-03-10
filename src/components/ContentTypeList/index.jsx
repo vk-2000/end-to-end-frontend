@@ -2,6 +2,7 @@ import React from 'react';
 import './ContentTypeList.css';
 import PropTypes from 'prop-types';
 import DottedButton from '../DottedButton';
+import searchIcon from '../../assets/icons/search-icon.png';
 
 const ContentTypeList = ({ contentTypes, handleContentTypeClick, handleAddContentClick }) => (
   <div className="content-type-list-body">
@@ -12,7 +13,7 @@ const ContentTypeList = ({ contentTypes, handleContentTypeClick, handleAddConten
         Types
       </div>
       <div>
-        <img src="" alt="" />
+        <img src={searchIcon} alt="search" />
       </div>
     </div>
     <DottedButton onClick={handleAddContentClick} text="+ New Type" />
@@ -20,7 +21,7 @@ const ContentTypeList = ({ contentTypes, handleContentTypeClick, handleAddConten
       {contentTypes.map((contentType) => (
         <button onClick={() => handleContentTypeClick(contentType.id)} type="button" key={contentType.id} className="content-type-list-item">
           <div>{contentType.name}</div>
-          <div>13</div>
+          <div>{contentType.collectionsCount}</div>
         </button>
       ))}
     </div>

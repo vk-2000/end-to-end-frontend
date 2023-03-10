@@ -5,7 +5,12 @@ import ContentFields from '../../components/ContentFields';
 import ContentTypeList from '../../components/ContentTypeList';
 import Navbar from '../../components/Navbar';
 import {
-  ADD_CONTENT_TYPE, ADD_FIELD_BY_ID, DELETE_FIELDBY_ID, GET_ALL_CONTENT_TYPES, UPDATE_FIELD_BY_ID,
+  ADD_CONTENT_TYPE,
+  ADD_FIELD_BY_ID,
+  DELETE_FIELDBY_ID,
+  GET_ALL_CONTENT_TYPES,
+  UPDATE_CONTENT_NAME_BY_ID,
+  UPDATE_FIELD_BY_ID,
 } from '../../constants/apiEndPoints';
 import { LOGIN } from '../../constants/routes';
 import makeRequest from '../../utils/makeRequest';
@@ -17,11 +22,9 @@ const ContentTypeBuilder = () => {
   const [selectedContentType, setSelectedContentType] = useState(null);
   const [toAddField, setToAddField] = useState(false);
   const [toAddContent, setToAddContent] = useState(false);
-  const [token, setToken] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
     const localStorageToken = localStorage.getItem('token');
-    setToken(localStorageToken);
     if (!localStorageToken) {
       navigate(LOGIN);
     }
@@ -29,13 +32,8 @@ const ContentTypeBuilder = () => {
       headers: {
         authorization: localStorageToken,
       },
-    }).then((res) => {
-      console.log(res);
+    }, navigate).then((res) => {
       setContentTypes(res);
-    }).catch((err) => {
-      if (err.response.status === 401) {
-        navigate('/login');
-      }
     });
   }, []);
 
@@ -60,15 +58,38 @@ const ContentTypeBuilder = () => {
     setToAddContent(false);
     makeRequest(ADD_CONTENT_TYPE, {
       headers: {
-        authorization: token,
+        authorization: localStorage.getItem('token'),
       },
       data: {
         name,
       },
-    }).then((res) => {
+    }, navigate).then((res) => {
       setContentTypes([...contentTypes, res]);
-    }).catch((err) => {
-      console.log(err);
+    });
+  };
+
+  const handleContentNameUpdate = (name) => {
+    makeRequest(UPDATE_CONTENT_NAME_BY_ID(selectedContentType.id), {
+      headers: {
+        authorization: localStorage.getItem('token'),
+      },
+      data: {
+        name,
+      },
+    }, navigate).then(() => {
+      const updatedContentTypes = contentTypes.map((type) => {
+        if (type.id === selectedContentType.id) {
+          return {
+            ...type,
+            name,
+          };
+        }
+        return type;
+      });
+      setContentTypes(updatedContentTypes);
+      const newContentType = { ...selectedContentType };
+      newContentType.name = name;
+      setSelectedContentType(newContentType);
     });
   };
 
@@ -76,54 +97,46 @@ const ContentTypeBuilder = () => {
     setToAddField(false);
     makeRequest(ADD_FIELD_BY_ID(selectedContentType.id), {
       headers: {
-        authorization: token,
+        authorization: localStorage.getItem('token'),
       },
       data: {
         name,
         type: 'string',
       },
-    }).then((res) => {
-      console.log(res);
-    }).catch((err) => {
-      console.log(err);
+    }, navigate).then(() => {
+      const newContentType = { ...selectedContentType };
+      newContentType.fields[name] = 'string';
+      setSelectedContentType(newContentType);
     });
-    const newContentType = { ...selectedContentType };
-    newContentType.fields[name] = 'string';
-    setSelectedContentType(newContentType);
   };
 
   const handleFieldDelete = (fieldName) => {
     makeRequest(DELETE_FIELDBY_ID(selectedContentType.id, fieldName), {
       headers: {
-        authorization: token,
+        authorization: localStorage.getItem('token'),
       },
-    }).then((res) => {
-      console.log(res);
-    }).catch((err) => {
-      console.log(err);
+    }, navigate).then(() => {
+      const newContentType = { ...selectedContentType };
+      delete newContentType.fields[fieldName];
+      setSelectedContentType(newContentType);
     });
-    const newContentType = { ...selectedContentType };
-    delete newContentType.fields[fieldName];
-    setSelectedContentType(newContentType);
   };
   const handleFieldUpdate = (oldName, newName) => {
+    if (oldName === newName) return;
     makeRequest(UPDATE_FIELD_BY_ID(selectedContentType.id, oldName), {
       headers: {
-        authorization: token,
+        authorization: localStorage.getItem('token'),
       },
       data: {
         newName,
         type: 'string',
       },
-    }).then((res) => {
-      console.log(res);
-    }).catch((err) => {
-      console.log(err);
+    }, navigate).then(() => {
+      const newContentType = { ...selectedContentType };
+      newContentType.fields[newName] = newContentType.fields[oldName];
+      delete newContentType.fields[oldName];
+      setSelectedContentType(newContentType);
     });
-    const newContentType = { ...selectedContentType };
-    newContentType.fields[newName] = newContentType.fields[oldName];
-    delete newContentType.fields[oldName];
-    setSelectedContentType(newContentType);
   };
 
   return (!contentTypes ? <div>loading</div> : (
@@ -164,6 +177,7 @@ const ContentTypeBuilder = () => {
             handleFieldDelete={handleFieldDelete}
             handleFieldUpdate={handleFieldUpdate}
             handleAddFieldClick={handleAddFieldClick}
+            handleContentNameUpdate={handleContentNameUpdate}
 
           />
 

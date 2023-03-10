@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DottedButton should render correctly 1`] = `
+<DocumentFragment>
+  <button
+    class="dotted-button"
+    type="button"
+  >
+    Hello
+  </button>
+</DocumentFragment>
+`;

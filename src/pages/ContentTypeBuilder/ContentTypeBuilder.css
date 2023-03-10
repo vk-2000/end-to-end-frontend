@@ -12,7 +12,7 @@
     background-color: #ebeefe;
 }
 .content-container .content-header {
-    height: 50px;
+    min-height: 7vh;
     display: flex;
     justify-content: flex-start;
     align-items: center;

@@ -18,11 +18,9 @@ const Collection = () => {
   const [selectedContentType, setSelectedContentType] = useState(null);
   const [collections, setCollections] = useState(null);
   const { contentId } = useParams();
-  const [token, setToken] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
     const localStorageToken = localStorage.getItem('token');
-    setToken(localStorageToken);
     if (!localStorageToken) {
       navigate(LOGIN);
     }
@@ -30,83 +28,55 @@ const Collection = () => {
       headers: {
         authorization: localStorageToken,
       },
-    }).then((res) => {
+    }, navigate).then((res) => {
       setContentTypes(res);
       setSelectedContentType(res.filter((c) => c.id === Number(contentId))[0]);
-    }).catch((err) => {
-      if (err.response.status === 401) {
-        navigate('/login');
-      }
     });
     makeRequest(GET_COLLECTIONS_BY_ID(contentId), {
       headers: {
         authorization: localStorageToken,
       },
-    }).then((res) => {
-      console.log(res);
+    }, navigate).then((res) => {
       setCollections(res);
-    }).catch((err) => {
-      console.log(err);
-      if (err.response.status === 401) {
-        navigate('/login');
-      }
     });
   }, [contentId]);
   const handleAddCollection = (data) => {
     makeRequest(ADD_COLLECTION_BY_ID(contentId), {
       headers: {
-        authorization: token,
+        authorization: localStorage.getItem('token'),
       },
       data: {
         values: data,
       },
-    }).then((res) => {
-      console.log(res);
+    }, navigate).then((res) => {
       setCollections([...collections, res]);
-    }).catch((err) => {
-      console.log(err);
-      if (err.response.status === 401) {
-        navigate('/login');
-      }
     });
   };
   const handleDeleteCollection = (id) => {
     makeRequest(DELETE_COLLECTION_BY_ID(contentId, id), {
       headers: {
-        authorization: token,
+        authorization: localStorage.getItem('token'),
       },
-    }).then((res) => {
-      console.log(res);
+    }, navigate).then(() => {
       setCollections(collections.filter((c) => c.id !== id));
-    }).catch((err) => {
-      console.log(err);
-      if (err.response.status === 401) {
-        navigate('/login');
-      }
     });
   };
   const handleEditCollection = (id, data) => {
     makeRequest(UPDATE_COLLECTION_BY_ID(contentId, id), {
       headers: {
-        authorization: token,
+        authorization: localStorage.getItem('token'),
       },
       data: {
         values: data,
       },
-    }).then((res) => {
+    }, navigate).then((res) => {
       const updatedCollections = collections.map((c) => {
         if (c.id === id) {
           return res[1][0];
         }
         return c;
       });
-      console.log(updatedCollections);
       setCollections(updatedCollections);
-    }).catch((err) => {
-      console.log(err);
-      if (err.response.status === 401) {
-        navigate('/login');
-      }
     });
   };
   if (!contentTypes) return (<div>Loading...</div>);
@@ -125,7 +95,16 @@ const Collection = () => {
           {
             collections && (
             <CollectionInstances
-              collections={collections}
+              collections={
+                // add id to values object of each collection
+                collections.map((collection) => ({
+                  ...collection,
+                  values: {
+                    id: collection.id,
+                    ...collection.values,
+                  },
+                }))
+              }
               contentType={selectedContentType}
               handleAddCollection={handleAddCollection}
               handleDeleteCollection={handleDeleteCollection}

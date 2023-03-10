@@ -2,7 +2,10 @@
     flex-basis: 40%;
     background-color: #d4d6e5;
     padding: 20px;
+    height: 93vh;
+    overflow-y: scroll;
 }
+
 .content-type-list-item {
     background-color: white;
     border-radius: 10px;
@@ -19,4 +22,19 @@
 .content-type-list-item:focus {
     background-color: #5905ce;
     color: white;
+}
+.content-type-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    padding: 20px 0;
+    color: #585a5e
+}
+.content-type-list-header img {
+    height: 20px;
+    width: 20px;
+    object-fit: contain;
+    cursor: pointer;
 }

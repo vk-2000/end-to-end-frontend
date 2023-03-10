@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Field should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="content-fields-body-item"
+  >
+    <div
+      class="field-image"
+    >
+      Ab
+    </div>
+    <div
+      class="field-container"
+    >
+      <div
+        class="field-name"
+      >
+        <span>
+          Hello
+        </span>
+      </div>
+      <div
+        class="field-type"
+      >
+        World
+      </div>
+      <div
+        class="edit-actions-field"
+      >
+        <button
+          class="btn-edit"
+          data-testid="btn-field-edit"
+          type="button"
+        >
+          <img
+            alt="edit"
+            src="user-edit-large.png"
+          />
+        </button>
+        <button
+          class="btn-delete"
+          data-testid="btn-field-delete"
+          type="button"
+        >
+          <img
+            alt="delete"
+            src="delete-icon.png"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,10 @@
+.error-contents {
+    height: 80vh;
+    position: relative;
+}
+.error-contents div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

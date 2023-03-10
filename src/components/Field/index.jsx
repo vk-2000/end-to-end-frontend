@@ -14,6 +14,12 @@ const Field = ({
       setShowInputEle(false);
     }
   };
+  const handleBlur = (e) => {
+    if (e.target.value !== '') {
+      handleFieldUpdate(field, e.target.value);
+      setShowInputEle(false);
+    }
+  };
   return (
     <div className="content-fields-body-item">
       <div className="field-image">
@@ -22,7 +28,7 @@ const Field = ({
       <div className="field-container">
         <div className="field-name">
           {showInputEle ? (
-            <input defaultValue={field} onKeyDown={handleKeyDown} />
+            <input data-testid="field-test-input" defaultValue={field} onKeyDown={handleKeyDown} onBlur={handleBlur} />
           ) : (
             <span>{field}</span>
           )}
@@ -31,10 +37,10 @@ const Field = ({
           {type}
         </div>
         <div className="edit-actions-field">
-          <button className="btn-edit" onClick={() => setShowInputEle(true)} type="button">
+          <button data-testid="btn-field-edit" className="btn-edit" onClick={() => setShowInputEle(true)} type="button">
             <img src={editIcon} alt="edit" />
           </button>
-          <button className="btn-delete" onClick={() => handleFieldDelete(field)} type="button">
+          <button data-testid="btn-field-delete" className="btn-delete" onClick={() => handleFieldDelete(field)} type="button">
             <img src={deleteIcon} alt="delete" />
           </button>
         </div>

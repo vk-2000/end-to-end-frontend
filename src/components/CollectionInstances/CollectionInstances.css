@@ -1,3 +1,7 @@
+.collection-instance-body {
+    padding: 20px;
+}
+
 .collection-instance-header {
     display: flex;
     height: 50px;
@@ -11,7 +15,7 @@
     color: #4f4f4f;
 }
 .collection-instance-header button {
-    color: purple;
+    color: #6143dc;
     background: transparent;
     border: none;
     font-size: 1rem;
@@ -27,6 +31,10 @@
 }
 .collection-instance-table-header-item {
     flex-basis: 15%;
+    text-align: start;
+    padding-left: 25px;
+    color: #828389;
+    
 }
 .collection-action {
     margin-left: auto;
@@ -41,7 +49,26 @@
     background-color: white;
     border-radius: 10px;
     margin: 10px 0;
+    padding-left: 20px;
 }
 .collection-instance-table-body-item-value {
     flex-basis: 15%;
+    text-align: start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: 10px;
+    color: #828389;
+}
+.collection-action button {
+    background: transparent;
+    border: none;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+}
+.collection-action button img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    
 }
