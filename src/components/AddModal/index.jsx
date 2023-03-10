@@ -10,7 +10,7 @@ const AddModal = ({
     <div className="add-modal">
       <div className="add-container">
         <h3>{title}</h3>
-        <form>
+        <div className="form">
           <label htmlFor="name">
             <div>
               {label}
@@ -21,7 +21,7 @@ const AddModal = ({
             <button className="add-btn-cancel" onClick={cancelHandler} type="button">Cancel</button>
             <button className="add-btn-create" onClick={() => submitHandler(name)} type="button">Create</button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

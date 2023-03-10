@@ -2,6 +2,8 @@
     flex-basis: 60%;
     background-color: #ebeefe;
     padding: 20px;
+    height: 93vh;
+    overflow-y: scroll;
 }
 .content-fields-body-item {
     width: 100%;

@@ -22,6 +22,7 @@ const ContentTypeBuilder = () => {
   const [selectedContentType, setSelectedContentType] = useState(null);
   const [toAddField, setToAddField] = useState(false);
   const [toAddContent, setToAddContent] = useState(false);
+  const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     const localStorageToken = localStorage.getItem('token');
@@ -103,10 +104,15 @@ const ContentTypeBuilder = () => {
         name,
         type: 'string',
       },
-    }, navigate).then(() => {
+    }).then(() => {
       const newContentType = { ...selectedContentType };
       newContentType.fields[name] = 'string';
       setSelectedContentType(newContentType);
+    }).catch((err) => {
+      setShowError(err.response?.data?.message || 'Something went wrong');
+      setTimeout(() => {
+        setShowError(null);
+      }, 2000);
     });
   };
 
@@ -141,6 +147,11 @@ const ContentTypeBuilder = () => {
 
   return (!contentTypes ? <div>loading</div> : (
     <div className="content-builder-body">
+      {showError && (
+      <div className="error-container">
+        {showError}
+      </div>
+      )}
       {toAddContent && (
       <AddModal
         title="Add Content Type"

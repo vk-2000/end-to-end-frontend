@@ -20,6 +20,16 @@ const CollectionInstances = ({
     setShowAddModal(false);
     handleAddCollection(data);
   };
+  const getFieldsWithoutId = (fields) => {
+    const newFields = {};
+    Object.keys(fields).forEach((key) => {
+      if (key !== 'id') {
+        newFields[key] = fields[key];
+      }
+    });
+    return newFields;
+  };
+
   const submitEditHandler = (data) => {
     const newData = {};
     Object.keys(data).forEach((key) => {
@@ -47,7 +57,9 @@ const CollectionInstances = ({
         showDefault
         title={`Modify ${contentType.name}`}
         fields={
-            collections.find((collection) => collection.id === editCollectionId).values
+            getFieldsWithoutId(collections.find(
+              (collection) => collection.id === editCollectionId,
+            ).values)
         }
         submitHandler={submitEditHandler}
         cancelHandler={onCancelHandler}

@@ -16,8 +16,10 @@ const Login = () => {
       localStorage.setItem('token', res.token);
       navigate('/dashboard');
     }).catch((err) => {
-      console.log(err);
       setErrorMessage(err.response?.data?.message);
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 2000);
     });
   };
   const loginOptions = {
@@ -32,7 +34,7 @@ const Login = () => {
   };
   return (
     <div className="login-body">
-      {errorMessage && <div className="error-toast">{errorMessage}</div>}
+      {errorMessage && <div className="error-container">{errorMessage}</div>}
       <div className="img-container">
         <img src={loginImage} alt="login-page" />
         <div className="login-text">
