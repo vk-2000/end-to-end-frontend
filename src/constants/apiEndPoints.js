@@ -25,3 +25,19 @@ export const ADD_FIELD_BY_ID = (id) => ({
   url: `${BACKEND_URL}/contents/${id}/fields`,
   method: 'PATCH',
 });
+export const GET_COLLECTIONS_BY_ID = (contentId) => ({
+  url: `${BACKEND_URL}/contents/${contentId}/collections`,
+  method: 'GET',
+});
+export const ADD_COLLECTION_BY_ID = (contentId) => ({
+  url: `${BACKEND_URL}/contents/${contentId}/collections`,
+  method: 'POST',
+});
+export const DELETE_COLLECTION_BY_ID = (contentId, collectionId) => ({
+  url: `${BACKEND_URL}/contents/${contentId}/collections/${collectionId}`,
+  method: 'DELETE',
+});
+export const UPDATE_COLLECTION_BY_ID = (contentId, collectionId) => ({
+  url: `${BACKEND_URL}/contents/${contentId}/collections/${collectionId}`,
+  method: 'PATCH',
+});

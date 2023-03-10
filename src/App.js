@@ -11,7 +11,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<ContentTypeBuilder />} />
-          <Route path="/collections/:collectionId" element={<Collection />} />
+          <Route path="/collections/:contentId" element={<Collection />} />
         </Routes>
       </BrowserRouter>
     </div>

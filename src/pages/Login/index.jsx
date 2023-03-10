@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import loginImage from '../../assets/images/login-page-3.png';
@@ -9,7 +9,7 @@ import './Login.css';
 
 const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const [errorMessage, setErrorMessage] = React.useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
   const handleLogin = (data) => {
     makeRequest(LOGIN, { data }).then((res) => {

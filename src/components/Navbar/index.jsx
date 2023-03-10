@@ -27,7 +27,7 @@ const Navbar = ({ collectionList }) => {
           </div>
         ))}
       </div>
-      <button type="button" style={location.pathname === DASHBOARD ? selectedStyle : {}} className="content-btn">
+      <button onClick={() => navigate(DASHBOARD)} type="button" style={location.pathname === DASHBOARD ? selectedStyle : {}} className="content-btn">
         CONTENT TYPE BUILDER
       </button>
     </nav>

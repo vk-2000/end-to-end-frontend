@@ -1,0 +1,47 @@
+.collection-instance-header {
+    display: flex;
+    height: 50px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px
+}
+.collection-header-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #4f4f4f;
+}
+.collection-instance-header button {
+    color: purple;
+    background: transparent;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.collection-instance-table-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+}
+.collection-instance-table-header-item {
+    flex-basis: 15%;
+}
+.collection-action {
+    margin-left: auto;
+    flex-basis: 15%;
+}
+.collection-instance-table-body-item{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+.collection-instance-table-body-item-value {
+    flex-basis: 15%;
+}
