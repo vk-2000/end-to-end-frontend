@@ -9,6 +9,10 @@ export const VERIFY_TOKEN = {
   url: `${AUTH_URL}/auth/token/verify`,
   method: 'POST',
 };
+export const REGISTER = {
+  url: `${AUTH_URL}/users`,
+  method: 'POST',
+};
 export const GET_ALL_CONTENT_TYPES = {
   url: `${BACKEND_URL}/contents`,
   method: 'GET',

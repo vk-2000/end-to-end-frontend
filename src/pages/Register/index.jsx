@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import loginImage from '../../assets/images/login-page-3.png';
-import { LOGIN } from '../../constants/apiEndPoints';
+import { REGISTER } from '../../constants/apiEndPoints';
 import makeRequest from '../../utils/makeRequest';
 import '../Login/Login.css';
 
@@ -12,9 +12,9 @@ const Register = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
   const handleLogin = (data) => {
-    makeRequest(LOGIN, { data }).then((res) => {
-      localStorage.setItem('token', res.token);
-      navigate('/dashboard');
+    makeRequest(REGISTER, { data }).then((res) => {
+      console.log(res);
+      navigate('/login');
     }, navigate)
       .catch((err) => {
         setErrorMessage(err.message);
